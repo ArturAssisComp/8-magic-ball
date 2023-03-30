@@ -7,10 +7,12 @@ const colorsMap = <String, Color>{
 };
 
 //Image ids:
-const ImageAssetName = <String>[
+const imageAssetName = <String>[
   'images/ball1.png',
   'images/ball2.png',
   'images/ball3.png',
   'images/ball4.png',
   'images/ball5.png',
 ];
+
+const waitingImageName = 'images/waiting.png';

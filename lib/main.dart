@@ -36,12 +36,19 @@ class EightBallStateful extends StatefulWidget {
 }
 
 class _EightBallStatefulState extends State<EightBallStateful> {
-  final maxIndex = ImageAssetName.length;
+  final maxIndex = imageAssetName.length;
   int currentImageIndex = 0;
+  bool waiting = false;
 
   void updateAnswer() {
     setState(() {
-      currentImageIndex = Random().nextInt(maxIndex);
+      waiting = true;
+    });
+    Future.delayed(const Duration(milliseconds: 500), () {
+      setState(() {
+        waiting = false;
+        currentImageIndex = Random().nextInt(maxIndex);
+      });
     });
   }
 
@@ -54,9 +61,10 @@ class _EightBallStatefulState extends State<EightBallStateful> {
           height: 300,
           child: TextButton(
             onPressed: () {
-              updateAnswer();
+              if (!waiting) updateAnswer();
             },
-            child: Image.asset(ImageAssetName[currentImageIndex]),
+            child: Image.asset(
+                waiting ? waitingImageName : imageAssetName[currentImageIndex]),
           ),
         ),
       ),
